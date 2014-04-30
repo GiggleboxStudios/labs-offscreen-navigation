@@ -1,0 +1,31 @@
+
+
+
+.box-sizing(@arg: border-box) when (@webkit = true)   { -webkit-box-sizing: @arg; }
+.box-sizing(@arg: border-box) when (@moz    = true)   { -moz-box-sizing: @arg; }
+.box-sizing(@arg: border-box) when (@ms     = true)   { -ms-box-sizing: @arg; }
+.box-sizing(@arg: border-box)                         { box-sizing: @arg; }
+
+
+.translate3d(@x:0, @y:0, @z:0) when (@webkit  = true) { -webkit-transform: translate3d(@x, @y, @z); }
+.translate3d(@x:0, @y:0, @z:0) when (@moz     = true) { -moz-transform: translate3d(@x, @y, @z); }
+.translate3d(@x:0, @y:0, @z:0) when (@ms      = true) { -ms-transform: translate3d(@x, @y, @z); }
+.translate3d(@x:0, @y:0, @z:0)                        { transform: translate3d(@x, @y, @z); }
+
+
+.translateX(@x:0) when (@webkit  = true)              { -webkit-transform: translateX(@x); }
+.translateX(@x:0) when (@moz     = true)              { -moz-transform: translateX(@x); }
+.translateX(@x:0) when (@ms      = true)              { -ms-transform: translateX(@x); }
+.translateX(@x:0)                                     { transform: translateX(@x); }
+
+
+.translateY(@y:0) when (@webkit  = true)              { -webkit-transform: translateY(@y); }
+.translateY(@y:0) when (@moz     = true)              { -moz-transform: translateY(@y); }
+.translateY(@y:0) when (@ms      = true)              { -ms-transform: translateY(@y); }
+.translateY(@y:0)                                     { transform: translateY(@y); }
+
+
+.translateZ(@z:0) when (@webkit  = true)              { -webkit-transform: translateZ(@z); }
+.translateZ(@z:0) when (@moz     = true)              { -moz-transform: translateZ(@z); }
+.translateZ(@z:0) when (@ms      = true)              { -ms-transform: translateZ(@z); }
+.translateZ(@z:0)                                     { transform: translateZ(@z); }
