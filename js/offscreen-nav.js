@@ -12,11 +12,25 @@ $(document).ready(function() {
     return check;
   }
 
-  var eventtype = mobilecheck() ? 'touchstart' : 'click';
+  var eventType     = mobilecheck() ? 'touchstart' : 'click'
+    , trigger       = $('[data-mz-trigger="offscreen-nav"]')
+    , navContainer  = $('[data-mz-nav="offscreen-nav"]')
+    , $doc          = $(document)
+    , state = {
+        active: 'active'
+      }
+    ;
+
+  trigger.on(eventType, function(e) {
+    navContainer.toggleClass(state.active);
 
 
+    $doc.on(eventType, function(e) {
+      e.stopPropogation();
+      navContainer.toggleClass(state.active);
+    })
 
-
+  });
 
 
 

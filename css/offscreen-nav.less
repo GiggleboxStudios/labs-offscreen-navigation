@@ -1,0 +1,75 @@
+
+@full-size: 100%;
+
+@gutter: 10px;
+
+
+@page-level:  1000;
+@menu-level:  5000;
+@modal-level: 8000;
+
+
+@menu-anchor:           left;  // specify which side to render the menu
+@menu-slide-direction:  -1;       // left: -1 || right: 1
+@menu-width:            300px;
+
+
+html, body {
+  width: @full-size;
+  height: @full-size;
+}
+
+.container {
+  position: absolute;
+  width: @full-size;
+  height: @full-size;
+}
+
+
+.push-container {
+  position: relative;
+  overflow: hidden;
+  width: @full-size;
+  height: @full-size;
+}
+
+
+.menu-container {
+  position: fixed;
+  z-index: @menu-level;
+  overflow: hidden;
+  width: @menu-width;
+  @{menu-anchor}: 0;
+  .translate((@menu-width * @menu-slide-direction),0);
+  // .translate3d((@menu-width * @menu-slide-direction),0,0);
+
+  &.active {
+    .translate(0,0);
+    // .translate3d(0,0,0);
+
+    & + div>.scroll-content {
+      .translate((@menu-width * -1 * @menu-slide-direction),0);
+      // .translate3d((@menu-width * -1 * @menu-slide-direction),0,0);
+    }
+  }
+}
+
+.menu-wrapper {
+  position: relative;
+}
+
+
+.scroll-container {
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: @full-size;
+  height: @full-size;
+}
+
+
+.scroll-content {
+  padding: @gutter;
+  position: relative;
+}
+
