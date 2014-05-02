@@ -1,23 +1,31 @@
 
-@full-size: 100%;
+//
+// Variables
+//
 
-@gutter: 10px;
-
-
-@page-level:  1000;
-@menu-level:  5000;
-@modal-level: 8000;
+@menu-anchor:           left;   // specify which side to render the menu
+@menu-width:            280px;  // width of menu
 
 
-@menu-anchor:           left;  // specify which side to render the menu
-@menu-slide-direction:  -1;       // left: -1 || right: 1
-@menu-width:            300px;
+//
+// Mixins
+//
 
+.slide-menu() when (@menu-anchor = left)      { .translate((@menu-width * -1),0); }
+.slide-menu() when (@menu-anchor = right)     { .translate((@menu-width * 1),0); }
+.slide-content() when (@menu-anchor = left)   { .translate((@menu-width * 1),0); }
+.slide-content() when (@menu-anchor = right)  { .translate((@menu-width * -1),0); }
+
+
+//
+// Styles
+//
 
 html, body {
   width: @full-size;
   height: @full-size;
 }
+
 
 .container {
   position: absolute;
@@ -38,21 +46,38 @@ html, body {
   position: fixed;
   z-index: @menu-level;
   overflow: hidden;
+  overflow-y: visible;
   width: @menu-width;
-  @{menu-anchor}: 0;
-  .translate((@menu-width * @menu-slide-direction),0);
-  // .translate3d((@menu-width * @menu-slide-direction),0,0);
+  height: @full-size;
+  @{menu-anchor}: 0;  // determines 'left' or 'right' alignment to .push-container
+
+  .slide-menu();
 
   &.active {
     .translate(0,0);
-    // .translate3d(0,0,0);
 
-    & + div>.scroll-content {
-      .translate((@menu-width * -1 * @menu-slide-direction),0);
-      // .translate3d((@menu-width * -1 * @menu-slide-direction),0,0);
-    }
+    // TODO: add transitions to menu slide
+
+    // TODO: fade out .scroll-content with full-screen overlay
+    // & + .scroll-container {
+    //   &:before,
+    //   &::before {
+    //     position: fixed;
+    //     z-index: (@menu-level - 100);
+    //     width: @full-size;
+    //     height: @full-size;
+    //     background: rgba(0,0,0,0.5);
+    //     content: '';
+    //   }
+    // }
   }
 }
+
+
+.menu-container.active + div>.scroll-content {
+  .slide-content();
+}
+
 
 .menu-wrapper {
   position: relative;
@@ -69,7 +94,7 @@ html, body {
 
 
 .scroll-content {
-  padding: @gutter;
   position: relative;
+  padding: @gutter;
 }
 

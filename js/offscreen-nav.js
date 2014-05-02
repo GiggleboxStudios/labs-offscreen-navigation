@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 
-  // http://coveroverflow.com/a/11381730/989439
+  // http://detectmobilebrowsers.com/
   function mobilecheck() {
     var check = false;
     (function(a) {
@@ -24,11 +24,11 @@ $(document).ready(function() {
   trigger.on(eventType, function(e) {
     navContainer.toggleClass(state.active);
 
-
-    $doc.on(eventType, function(e) {
-      e.stopPropogation();
-      navContainer.toggleClass(state.active);
-    })
+    // TODO: add event listener to close on "off-nav" click
+    // $(".scroll-container:before").on(eventType, function(e) {
+    //   e.stopPropogation();
+    //   navContainer.toggleClass(state.active);
+    // });
 
   });
 
