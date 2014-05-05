@@ -28,29 +28,29 @@ $(document).ready(function() {
     , $body           = $('body')
     , $navContainer   = $('[data-nav*="offcanvas-nav"]')
 
-    , closeMenu = function(targetID) {
-          var targetNav     = $('[data-nav="' + targetID + '"]')
-            , targetTrigger = $('[data-trigger="' + targetID + '"]')
+    , closeMenu = function() {
+          var targetNav     = $('[data-nav]')
+            , targetTrigger = $('[data-trigger]')
+            , navOverlay    = $('[data-overlay]')
             ;
 
           targetTrigger.removeClass(state.active);
           targetNav.removeClass(state.active);
           targetNav.find('.nav-panel').removeClass(state.active);
+          navOverlay.removeClass(state.active);
         }
 
     , openMenu = function(targetID) {
           var targetNav     = $('[data-nav="' + targetID + '"]')
             , targetTrigger = $('[data-trigger="' + targetID + '"]')
+            , navOverlay    = $('[data-overlay]')
             ;
 
           targetTrigger.addClass(state.active);
           targetNav.addClass(state.active);
+          navOverlay.addClass(state.active);
         }
     ;
-
-
-  // console.log(debugPrefix, clickEventType);
-  // window.alert(clickEventType);
 
 
   // Assign some helper classes to things
@@ -64,61 +64,68 @@ $(document).ready(function() {
       ;
 
 
+  // add a 'back' button to each sub nav level
+  $('.has-child').each(function(index, value) {
+    var $this = $(this)
+      ;
+
+    $this.next('ul').prepend(
+          '<li class="title"><a href="' + $this.attr('href') + '">' + $this.text() + '</a></li>'
+        + '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
+        );
+
+    // console.log(debugPrefix, index, value);
+  });
+
 
   // Handle the nav trigger button
   $body.on(clickEventType, '[data-trigger*="offcanvas-nav"]', function(e) {
       e.stopPropagation();
       e.preventDefault();
-
       var $this = $(this)
         , target = $this.data('trigger')
         ;
-
-      console.log(debugPrefix, target);
-
+      // console.log(debugPrefix, target);
       if ($this.hasClass(state.active)) {
-        closeMenu(target);
+        closeMenu();
       } else if (!$this.hasClass(state.active)) {
         openMenu(target);
       }
-
     });
 
 
   // Handle subnav drill down events
-  $body.on(clickEventType, 'a.has-child', function(e) {
+  $navContainer.on(clickEventType, 'a.has-child', function(e) {
       e.stopPropagation();
       e.preventDefault();
-
       var $this = $(this);
       $this.next('ul').addClass(state.active);
-
       return false; // prevent phantom clicks from the nav trigger happening on mobile
     });
 
 
   // Attempted handler to fix the double click event on nav elements
-  $body.on(clickEventType, 'a.has-no-child', function(e) {
+  $navContainer.on(clickEventType, 'a.has-no-child', function(e) {
       e.stopPropagation();
       e.preventDefault();
-
       var $this = $(this);
       window.location.href=$this.attr('href');
-
       return false; // prevent phantom clicks from the nav trigger happening on mobile
     });
 
 
   // Handle subnav up events
-  $body.on(clickEventType, 'a.nav-back', function(e) {
-      e.stopPropogation();
-
+  $navContainer.on(clickEventType, 'button[data-nav-back]', function(e) {
       var $this = $(this);
+      $this.parent().parent().removeClass(state.active);
+      return false; // prevent phantom clicks from the nav trigger happening on mobile
+    });
 
-   });
 
-
-
+  $body.on(clickEventType, '[data-overlay].active', function(e) {
+      var $this = $(this);
+      closeMenu();
+    });
 
   // TODO: add event listener to close on "off-nav" click
   // $(".scroll-container:before").on(clickEventType, function(e) {

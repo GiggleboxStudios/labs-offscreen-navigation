@@ -7,6 +7,9 @@
 @menu-width:      280px;  // width of menu
 
 
+@nav-background-color: #e3e3e3;
+
+
 //
 // Mixins
 //
@@ -46,11 +49,11 @@ html, body {
   position: fixed;
   z-index: @z-menu-level;
   overflow: hidden;
-  overflow-y: visible;
+  // overflow-y: visible;
   width: @menu-width;
   height: @full-size;
   @{menu-anchor}: 0;  // determines 'left' or 'right' alignment to .push-container
-
+  .transitionPrefixed(transform);
   .slide-menu();
 
   &.active {
@@ -73,9 +76,9 @@ html, body {
   }
 
   ul, ol {
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 }
 
@@ -87,17 +90,23 @@ html, body {
 
 .menu-wrapper {
   position: relative;
+  height: @full-size;
+
+  ul {
+    height: @full-size;
+    background-color: @nav-background-color;
+  }
 }
 
 
 .nav-panel {
   position: absolute;
-  height: @full-size;
   left: -100%;
+  height: @full-size;
 
   &.active {
-    left: 0;
     top: 0;
+    left: 0;
     z-index: @z-menu-level + 100;
     width: @full-size;
   }
@@ -114,7 +123,25 @@ html, body {
 
 
 .scroll-content {
+  .transitionPrefixed(transform);
   position: relative;
   padding: @gutter;
+}
+
+
+[data-overlay] {
+  position: fixed;
+  z-index: (@z-menu-level - 500);
+  width: @full-size;
+  height: @full-size;
+  left: (@full-size * -1);
+  top: 0;
+  opacity: 0;
+  .transition(opacity);
+
+  &.active {
+    opacity: 1;
+    left: 0;
+  }
 }
 

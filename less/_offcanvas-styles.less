@@ -1,14 +1,14 @@
 
-
+@trans-black: rgba(0,0,0,0.5);
 
 [data-nav*="offcanvas-nav"] {
 
 
   .nav-panel {
-    background: @orange;
+    background-color: @nav-background-color;
 
     &.active {
-      background: @white;
+      // background: @white;
     }
   }
 
@@ -16,9 +16,26 @@
     background: @red;
   }
 
-  li > a {
+  li > .has-child,
+  li > .has-no-child,
+  li.title > a,
+  li > .nav-back-button {
     display: block;
     padding: 5px 10px;
+    border: 0;
+    text-align: left;
+    .appearance(none);
   }
 
+}
+
+
+.nav-back-button {
+  display: block;
+  width: @full-size;
+}
+
+
+[data-overlay] {
+  background-color: @trans-black;
 }

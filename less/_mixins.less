@@ -6,7 +6,7 @@
 
 
 // default params
-@anim-duration: 0.2s;
+@anim-duration: 0.25s;
 @anim-type: linear;
 
 
@@ -15,6 +15,11 @@
 .box-sizing(@arg: border-box) when (@ms     = true)       { -ms-box-sizing: @arg; }
 .box-sizing(@arg: border-box)                             { box-sizing: @arg; }
 
+
+.appearance(@arg: none) when (@webkit = true)             { -webkit-appearance: @arg; }
+.appearance(@arg: none) when (@moz    = true)             { -moz-appearance: @arg; }
+.appearance(@arg: none) when (@ms     = true)             { -ms-appearance: @arg; }
+.appearance(@arg: none)                                   { appearance: @arg; }
 
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@webkit = true)  { -webkit-transition: @arg @rest; }
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@moz    = true)  { -moz-transition: @arg @rest; }
