@@ -10,6 +10,7 @@
   "dependencies": {
     "jquery": "*",
     "modernizr": "*",
-    "normalize-less": "*"
+    "normalize-less": "*",
+    "less": "*"
   }
 }

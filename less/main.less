@@ -1,0 +1,42 @@
+
+// Colors
+@white:   #fff;
+@orange:  rgba(255,90,0,0.2);
+@red: rgba(255,0,0,0.2);
+
+
+// default dimensions
+@full-size: 100%;
+
+
+// page component dimensions
+@gutter: 10px;
+
+
+// component z-index scopes
+@z-page-level:  1000;
+@z-menu-level:  5000;
+@z-modal-level: 8000;
+
+
+// supported vendor prefixes [_mixins.less]
+@webkit:  true;
+@moz:     true;
+@ms:      true;
+
+
+@import "_mixins.less";
+
+
+* {
+  .box-sizing(border-box);
+}
+
+
+@import "../components/normalize-less/normalize.less";
+@import "_offcanvas-structure.less";
+@import "_offcanvas-styles.less";
+
+
+// Use this command for updating LESS/CSS
+// node components/less-watch-compiler/less-watch-compiler.js less css

@@ -4,127 +4,118 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offscreen Navigation Prototype</title>
-    <meta name="description" content="Multi-level offscreen navigation with mobile/touch support" />
+    <title>Off-Canvas Navigation Prototype</title>
+    <meta name="description" content="Multi-level offcanvas navigation with mobile/touch support" />
     <meta name="keywords" content="multi-level, menu, navigation, off-canvas, off-screen, mobile, levels, nested, transform" />
     <meta name="author" content="GiggleboxStudios" />
     <!-- <link rel="shortcut " href="../fav.ico"> -->
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/main.css" /> -->
+    <link rel="stylesheet/less" type="text/css" href="less/main.less" />
     <script src="components/modernizr/modernizr.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="push-container">
 
-        <nav class="menu-container" data-mz-nav="offscreen-nav">
+        <nav class="menu-container" data-mz-nav="offcanvas-nav">
           <div class="menu-wrapper">
-            <ul class="nav-sub-panel">
-              <li class="title"><a href="#">Testing</a></li>
-              <li>
-                <a href="#">testing</a>
-                <ul class="nav-sub-panel">
-                  <li class="title"><a href="#">Testing</a></li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
+            <ul>
+              <li><a href="level-1.html">Testing 1</a></li>
+              <li><a href="level-1.html">Testing 1</a>
+                <ul>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
                 </ul>
               </li>
-              <li>
-                <a href="#">testing</a>
-                <ul class="nav-sub-panel">
-                  <li class="title"><a href="#">Testing</a></li>
-                  <li>
-                    <a href="#">testing</a>
-                    <ul class="nav-sub-panel">
-                      <li class="title"><a href="#">Testing</a></li>
-                      <li>
-                        <a href="#">testing</a>
-                        <ul class="nav-sub-panel">
-                          <li class="title"><a href="#">Testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
+              <li><a href="level-1.html">Testing 1</a>
+                <ul>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a>
+                    <ul>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a>
+                        <ul>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
                         </ul>
                       </li>
-                      <li>
-                        <a href="#">testing</a>
-                        <ul class="nav-sub-panel">
-                          <li class="title"><a href="#">Testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
-                          <li><a href="#">testing</a></li>
+                      <li><a href="level-3.html">Testing 3</a>
+                        <ul>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
+                          <li><a href="level-4.html">Testing 4</a></li>
                         </ul>
                       </li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
                     </ul>
                   </li>
-                  <li>
-                    <a href="#">testing</a>
-                    <ul class="nav-sub-panel">
-                      <li class="title"><a href="#">Testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
+                  <li><a href="level-2.html">Testing 2</a>
+                    <ul>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
                     </ul>
                   </li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
                 </ul>
               </li>
-              <li>
-                <a href="#">testing</a>
-                <ul class="nav-sub-panel">
-                  <li class="title"><a href="#">Testing</a></li>
-                  <li>
-                    <a href="#">testing</a>
-                    <ul class="nav-sub-panel">
-                      <li class="title"><a href="#">Testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
+              <li><a href="level-1.html">Testing 1</a>
+                <ul>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a>
+                    <ul>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
                     </ul>
                   </li>
-                  <li>
-                    <a href="#">testing</a>
-                    <ul class="nav-sub-panel">
-                      <li class="title"><a href="#">Testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
+                  <li><a href="level-2.html">Testing 2</a>
+                    <ul>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
                     </ul>
                   </li>
-                  <li>
-                    <a href="#">testing</a>
-                    <ul class="nav-sub-panel">
-                      <li class="title"><a href="#">Testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
-                      <li><a href="#">testing</a></li>
+                  <li><a href="level-2.html">Testing 2</a>
+                    <ul>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
+                      <li><a href="level-3.html">Testing 3</a></li>
                     </ul>
                   </li>
-                  <li><a href="#">testing</a></li>
-                  <li><a href="#">testing</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
+                  <li><a href="level-2.html">Testing 2</a></li>
                 </ul>
               </li>
-              <li><a href="#">testing</a></li>
-              <li><a href="#">testing</a></li>
+              <li><a href="level-1.html">Testing 1</a></li>
+              <li><a href="level-1.html">Testing 1</a></li>
             </ul>
           </div>
         </nav>
@@ -133,7 +124,7 @@
         <div class="scroll-container"><!-- this is for emulating position fixed of the nav -->
           <div class="scroll-content">
 
-            <button data-mz-trigger="offscreen-nav">Offscreen Nav</button>
+            <button data-mz-trigger="offcanvas-nav">Off-canvas Nav</button>
 
             <h1>Content Title</h1>
 
@@ -161,8 +152,9 @@
       </div>
     </div>
 
+    <script type="text/javascript" src="components/less/dist/less-1.7.0.min.js"></script>
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="js/offscreen-nav.js"></script>
+    <script type="text/javascript" src="js/offcanvas-nav.js"></script>
 
   </body>
 </html>

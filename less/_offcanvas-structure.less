@@ -3,8 +3,8 @@
 // Variables
 //
 
-@menu-anchor:           left;   // specify which side to render the menu
-@menu-width:            280px;  // width of menu
+@menu-anchor:     left;   // specify which side to render the menu
+@menu-width:      280px;  // width of menu
 
 
 //
@@ -44,7 +44,7 @@ html, body {
 
 .menu-container {
   position: fixed;
-  z-index: @menu-level;
+  z-index: @z-menu-level;
   overflow: hidden;
   overflow-y: visible;
   width: @menu-width;
@@ -71,6 +71,12 @@ html, body {
     //   }
     // }
   }
+
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 
@@ -81,6 +87,19 @@ html, body {
 
 .menu-wrapper {
   position: relative;
+}
+
+
+.subnav-panel {
+  position: absolute;
+  left: -100%;
+
+  &.active {
+    left: 0;
+    top: 0;
+    z-index: @z-menu-level + 100;
+    width: @full-size;
+  }
 }
 
 

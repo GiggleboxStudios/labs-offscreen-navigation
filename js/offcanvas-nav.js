@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
   // http://detectmobilebrowsers.com/
@@ -12,25 +11,82 @@ $(document).ready(function() {
     return check;
   }
 
-  var eventType     = mobilecheck() ? 'touchstart' : 'click'
-    , trigger       = $('[data-mz-trigger="offscreen-nav"]')
-    , navContainer  = $('[data-mz-nav="offscreen-nav"]')
-    , $doc          = $(document)
+
+  var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
+
     , state = {
         active: 'active'
       }
+
+    , $win            = $(window)
+    , $doc            = $(document)
+    , $body           = $('body')
+    , $navTrigger     = $('[data-mz-trigger="offcanvas-nav"]')
+    , $navContainer   = $('[data-mz-nav="offcanvas-nav"]')
+
+
+    , closeMenu = function() {
+          $navTrigger.removeClass(state.active);
+          $navContainer.removeClass(state.active);
+          $navContainer.find('.subnav-panel').removeClass(state.active);
+        }
+
+    , openMenu = function() {
+          $navTrigger.addClass(state.active);
+          $navContainer.addClass(state.active);
+        }
     ;
 
-  trigger.on(eventType, function(e) {
-    navContainer.toggleClass(state.active);
 
-    // TODO: add event listener to close on "off-nav" click
-    // $(".scroll-container:before").on(eventType, function(e) {
-    //   e.stopPropogation();
-    //   navContainer.toggleClass(state.active);
-    // });
 
-  });
+  // Assign some helper classes to things
+  $navContainer
+    .find('li ul').addClass('subnav-panel')
+    .prev('a').addClass('has-child')
+    ;
+
+
+  // Handle the nav trigger button
+  $body.on(clickEventType, '[data-mz-trigger="offcanvas-nav"]', function(e) {
+      var $this = $(this)
+        ;
+
+      if ($this.hasClass(state.active)) {
+        closeMenu();
+      } else if (!$this.hasClass(state.active)) {
+        openMenu();
+      }
+
+    });
+
+
+  // Handle subnav down events
+  $navContainer.on(clickEventType, 'a.has-child', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      var $this = $(this);
+      $this.next('ul').addClass(state.active);
+      // window.alert($this.text());
+    });
+
+
+  // Handle subnav up events
+  $navContainer.on(clickEventType, 'a.nav-back', function(e) {
+      e.stopPropogation();
+
+      var $this = $(this);
+
+   });
+
+
+
+
+  // TODO: add event listener to close on "off-nav" click
+  // $(".scroll-container:before").on(clickEventType, function(e) {
+  //   e.stopPropogation();
+  //   navContainer.toggleClass(state.active);
+  // });
 
 
 
