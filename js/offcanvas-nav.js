@@ -21,46 +21,64 @@ $(document).ready(function() {
     , $win            = $(window)
     , $doc            = $(document)
     , $body           = $('body')
-    , $navTrigger     = $('[data-mz-trigger="offcanvas-nav"]')
-    , $navContainer   = $('[data-mz-nav="offcanvas-nav"]')
+    , $navContainer   = $('[data-nav*="offcanvas-nav"]')
+    , $navOverlay     = $('[data-nav-overlay]')
 
 
-    , closeMenu = function() {
-          $navTrigger.removeClass(state.active);
-          $navContainer.removeClass(state.active);
-          $navContainer.find('.subnav-panel').removeClass(state.active);
+    , closeMenu = function(targetMenu) {
+          var target  = $('[data-nav="'+targetMenu+'"]')
+            , trigger = $('[data-trigger="'+targetMenu+'"]')
+            ;
+
+          $navOverlay.removeClass(state.active);
+          trigger.removeClass(state.active);
+          target.removeClass(state.active);
+          target.find('.nav-panel').removeClass(state.active);
         }
 
-    , openMenu = function() {
-          $navTrigger.addClass(state.active);
-          $navContainer.addClass(state.active);
+    , openMenu = function(targetMenu) {
+          var target  = $('[data-nav="'+targetMenu+'"]')
+            , trigger = $('[data-trigger="'+targetMenu+'"]')
+            ;
+
+          $navOverlay.addClass(state.active);
+          trigger.addClass(state.active);
+          target.addClass(state.active);
         }
     ;
 
 
 
-  // Assign some helper classes to things
+  // Assign some helper classes to all nav panels
   $navContainer
-    .find('li ul').addClass('subnav-panel')
+    .find('div > ul').addClass('parent-nav-panel')
+    .find('li ul').addClass('nav-panel')
     .prev('a').addClass('has-child')
     ;
 
 
-  // Handle the nav trigger button
-  $body.on(clickEventType, '[data-mz-trigger="offcanvas-nav"]', function(e) {
+  $navContainer.on(clickEventType, function(e) {
+      closeMenu()
+    })
+
+
+  // Handle the nav trigger button(s)
+  $body.on(clickEventType, '[data-trigger*="offcanvas-nav"]', function(e) {
       var $this = $(this)
+        , target = $this.data('trigger')
         ;
 
+
       if ($this.hasClass(state.active)) {
-        closeMenu();
+        closeMenu(target);
       } else if (!$this.hasClass(state.active)) {
-        openMenu();
+        openMenu(target);
       }
 
     });
 
 
-  // Handle subnav down events
+  // Handle nav down events
   $navContainer.on(clickEventType, 'a.has-child', function(e) {
       e.stopPropagation();
       e.preventDefault();
@@ -71,7 +89,7 @@ $(document).ready(function() {
     });
 
 
-  // Handle subnav up events
+  // Handle nav up events
   $navContainer.on(clickEventType, 'a.nav-back', function(e) {
       e.stopPropogation();
 

@@ -18,7 +18,7 @@ This implementation assumes a singular master level offscreen nav and currently 
 ### Features:
 
 ``` sass
-// FILE: "css/offscreen-nav.less"
+// FILE: "css/offcanvas-structure.less"
 // Make offscreen nav slide in from left
 @menu-anchor:   left;
 
@@ -40,14 +40,14 @@ If you find an issue with this repo, please report it in [issues](https://github
 
 
 ## Browser Support
-- Chrome (Mac, iOS)
-- Firefox (Mac)
+- Chrome (Win, Mac, iOS)
+- Firefox (Win, Mac)
 - Safari 7 (Mac, iOS)
+- Opera (Win, Mac)
 
 _Need to test..._
 - IE 9+
-- Chrome (Win, Android)
-- Firefox (Win)
+- Chrome (Android)
 - Safari 7 (Win)
 - Safari 6 (Win, Mac, iOS)
 - Native Android browser

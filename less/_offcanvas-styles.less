@@ -1,19 +1,25 @@
 
 
+@white:         #fff;
 
-[data-mz-nav="offcanvas-nav"] {
+@orange:        rgba(255,90,0,0.2);
+@red:           rgba(255,0,0,0.2);
+@trans-black:   rgba(0,0,0,0.5);
 
 
-  .subnav-panel {
-    background: @orange;
+[data-nav="offcanvas-nav-main"] {
+
+
+  .nav-panel {
+    background-color: @orange;
 
     &.active {
-      background: @white;
+      background-color: @white;
     }
   }
 
   a.has-child {
-    background: @red;
+    background-color: @red;
   }
 
   li > a {
@@ -21,4 +27,9 @@
     padding: 5px 10px;
   }
 
+}
+
+
+.menu-overlay {
+  background-color: @trans-black;
 }
