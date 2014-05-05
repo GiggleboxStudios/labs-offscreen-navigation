@@ -1,14 +1,19 @@
 
+// supported vendor prefixes [_mixins.less]
+@webkit:  true;
+@moz:     true;
+@ms:      true;
+
+
+// default params
+@anim-duration: 0.2s;
+@anim-type: linear;
 
 
 .box-sizing(@arg: border-box) when (@webkit = true)       { -webkit-box-sizing: @arg; }
 .box-sizing(@arg: border-box) when (@moz    = true)       { -moz-box-sizing: @arg; }
 .box-sizing(@arg: border-box) when (@ms     = true)       { -ms-box-sizing: @arg; }
 .box-sizing(@arg: border-box)                             { box-sizing: @arg; }
-
-
-@anim-duration: 0.3s;
-@anim-type: linear;
 
 
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@webkit = true)  { -webkit-transition: @arg @rest; }

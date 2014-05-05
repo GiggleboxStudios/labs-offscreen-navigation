@@ -50,50 +50,54 @@ html, body {
   width: @menu-width;
   height: @full-size;
   @{menu-anchor}: 0;  // determines 'left' or 'right' alignment to .push-container
-  .transitionPrefixed(transform);
+
   .slide-menu();
 
   &.active {
     .translate(0,0);
 
     // TODO: add transitions to menu slide
-    // .transition(-webkit-transform);
-    // .transition(-moz-transform);
-    // .transition(-ms-transform);
-    // .transition(transform);
+
+    // TODO: fade out .scroll-content with full-screen overlay
+    // & + .scroll-container {
+    //   &:before,
+    //   &::before {
+    //     position: fixed;
+    //     z-index: (@menu-level - 100);
+    //     width: @full-size;
+    //     height: @full-size;
+    //     background: rgba(0,0,0,0.5);
+    //     content: '';
+    //   }
+    // }
   }
 
   ul, ol {
     list-style: none;
     margin: 0;
     padding: 0;
-    background-color: @orange;
   }
 }
 
-.menu-container.active + div > .scroll-content {
+
+.menu-container.active + div>.scroll-content {
   .slide-content();
 }
 
 
 .menu-wrapper {
   position: relative;
-  height: @full-size;
 }
 
+
 .nav-panel {
-  overflow: hidden;
-  height: @full-size;
-  max-height: @full-size;
   position: absolute;
-  width: @full-size;
-  top: 0;
+  height: @full-size;
   left: -100%;
 
   &.active {
     left: 0;
     top: 0;
-    overflow-y: auto;
     z-index: @z-menu-level + 100;
     width: @full-size;
   }
@@ -112,22 +116,5 @@ html, body {
 .scroll-content {
   position: relative;
   padding: @gutter;
-  .transitionPrefixed(transform);
-
-  &:before, &::before {
-    width: @full-size;
-    height: @full-size;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: (@z-menu-level - 50);
-    display: none;
-  }
-
-  .active {
-    &:before, &::before {
-      display: block;
-    }
-  }
 }
 

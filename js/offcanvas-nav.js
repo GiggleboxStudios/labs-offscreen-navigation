@@ -12,7 +12,12 @@ $(document).ready(function() {
   }
 
 
+  // Add FastClick in attempt to resolve mobile double-tap on nav reveal
+  // FastClick.attach(document.body);
+
+
   var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
+    , debugPrefix     = 'labs:'
 
     , state = {
         active: 'active'
@@ -22,52 +27,54 @@ $(document).ready(function() {
     , $doc            = $(document)
     , $body           = $('body')
     , $navContainer   = $('[data-nav*="offcanvas-nav"]')
-    , $navOverlay     = $('[data-nav-overlay]')
 
-
-    , closeMenu = function(targetMenu) {
-          var target  = $('[data-nav="'+targetMenu+'"]')
-            , trigger = $('[data-trigger="'+targetMenu+'"]')
+    , closeMenu = function(targetID) {
+          var targetNav     = $('[data-nav="' + targetID + '"]')
+            , targetTrigger = $('[data-trigger="' + targetID + '"]')
             ;
 
-          $navOverlay.removeClass(state.active);
-          trigger.removeClass(state.active);
-          target.removeClass(state.active);
-          target.find('.nav-panel').removeClass(state.active);
+          targetTrigger.removeClass(state.active);
+          targetNav.removeClass(state.active);
+          targetNav.find('.nav-panel').removeClass(state.active);
         }
 
-    , openMenu = function(targetMenu) {
-          var target  = $('[data-nav="'+targetMenu+'"]')
-            , trigger = $('[data-trigger="'+targetMenu+'"]')
+    , openMenu = function(targetID) {
+          var targetNav     = $('[data-nav="' + targetID + '"]')
+            , targetTrigger = $('[data-trigger="' + targetID + '"]')
             ;
 
-          $navOverlay.addClass(state.active);
-          trigger.addClass(state.active);
-          target.addClass(state.active);
+          targetTrigger.addClass(state.active);
+          targetNav.addClass(state.active);
         }
     ;
 
 
+  // console.log(debugPrefix, clickEventType);
+  // window.alert(clickEventType);
 
-  // Assign some helper classes to all nav panels
+
+  // Assign some helper classes to things
   $navContainer
-    .find('div > ul').addClass('parent-nav-panel')
-    .find('li ul').addClass('nav-panel')
-    .prev('a').addClass('has-child')
+    .find('a').addClass('has-no-child')
     ;
 
+  $navContainer
+    .find('li ul').addClass('nav-panel')
+      .prev('a').removeClass('has-no-child').addClass('has-child')
+      ;
 
-  $navContainer.on(clickEventType, function(e) {
-      closeMenu()
-    })
 
 
-  // Handle the nav trigger button(s)
+  // Handle the nav trigger button
   $body.on(clickEventType, '[data-trigger*="offcanvas-nav"]', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
       var $this = $(this)
         , target = $this.data('trigger')
         ;
 
+      console.log(debugPrefix, target);
 
       if ($this.hasClass(state.active)) {
         closeMenu(target);
@@ -78,19 +85,32 @@ $(document).ready(function() {
     });
 
 
-  // Handle nav down events
-  $navContainer.on(clickEventType, 'a.has-child', function(e) {
+  // Handle subnav drill down events
+  $body.on(clickEventType, 'a.has-child', function(e) {
       e.stopPropagation();
       e.preventDefault();
 
       var $this = $(this);
       $this.next('ul').addClass(state.active);
-      // window.alert($this.text());
+
+      return false; // prevent phantom clicks from the nav trigger happening on mobile
     });
 
 
-  // Handle nav up events
-  $navContainer.on(clickEventType, 'a.nav-back', function(e) {
+  // Attempted handler to fix the double click event on nav elements
+  $body.on(clickEventType, 'a.has-no-child', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      var $this = $(this);
+      window.location.href=$this.attr('href');
+
+      return false; // prevent phantom clicks from the nav trigger happening on mobile
+    });
+
+
+  // Handle subnav up events
+  $body.on(clickEventType, 'a.nav-back', function(e) {
       e.stopPropogation();
 
       var $this = $(this);
