@@ -55,6 +55,7 @@ $(document).ready(function() {
 
   // Assign some helper classes to things
   $navContainer
+    .removeAttr('style')
     .find('a').addClass('has-no-child')
     ;
 
