@@ -14,10 +14,13 @@
 // Mixins
 //
 
-.slide-menu() when (@menu-anchor = left)      { .translate((@menu-width * -1),0); }
-.slide-menu() when (@menu-anchor = right)     { .translate((@menu-width * 1),0); }
-.slide-content() when (@menu-anchor = left)   { .translate((@menu-width * 1),0); }
-.slide-content() when (@menu-anchor = right)  { .translate((@menu-width * -1),0); }
+.slide-menu() when (@menu-anchor = left)      { .translate(@menu-width * -1, 0); }
+.slide-menu() when (@menu-anchor = right)     { .translate(@menu-width * 1, 0); }
+.slide-content() when (@menu-anchor = left)   { .translate(@menu-width * 1, 0); }
+.slide-content() when (@menu-anchor = right)  { .translate(@menu-width * -1, 0); }
+
+.menu-side(@arg: 0) when (@menu-anchor = left) { left: @arg; }
+.menu-side(@arg: 0) when (@menu-anchor = right) { right: @arg; }
 
 
 //
@@ -52,12 +55,13 @@ html, body {
   position: fixed;
   z-index: @z-menu-level;
   overflow: hidden;
-  // overflow-y: visible;
   width: @menu-width;
   height: @full-size;
-  @{menu-anchor}: 0;  // determines 'left' or 'right' alignment to .push-container
   .transitionPrefixed(transform);
   .slide-menu();
+  // .transition(@menu-anchor);
+  .menu-side(0);             // determines 'left' or 'right' alignment to .push-container
+
 
   &.active {
     .translate(0,0);
@@ -96,6 +100,7 @@ html, body {
   height: @full-size;
 
   ul {
+    overflow-y: auto;
     height: @full-size;
     background-color: @nav-background-color;
   }
@@ -103,13 +108,14 @@ html, body {
 
 
 .nav-panel {
-  position: absolute;
-  left: -100%;
+  position: fixed;
+  top: 0;
   height: @full-size;
+  .menu-side(-100%);             // determines 'left' or 'right' alignment to .push-container
+  .transition(@menu-anchor);
 
   &.active {
-    top: 0;
-    left: 0;
+    .menu-side(0);
     z-index: @z-menu-level + 100;
     width: @full-size;
   }
@@ -134,17 +140,17 @@ html, body {
 
 [data-overlay] {
   position: fixed;
+  top: 0;
+  left: (@full-size * -1);
   z-index: (@z-menu-level - 500);
   width: @full-size;
   height: @full-size;
-  left: (@full-size * -1);
-  top: 0;
   opacity: 0;
   .transition(opacity);
 
   &.active {
-    opacity: 1;
     left: 0;
+    opacity: 1;
   }
 }
 

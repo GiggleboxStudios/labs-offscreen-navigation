@@ -17,6 +17,7 @@ $(document).ready(function() {
 
 
   var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
+  // var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
     , debugPrefix     = 'labs:'
 
     , state = {
@@ -27,6 +28,10 @@ $(document).ready(function() {
     , $doc            = $(document)
     , $body           = $('body')
     , $navContainer   = $('[data-nav*="offcanvas-nav"]')
+
+    , message = {
+        titlePrefix: false
+      }
 
     , closeMenu = function() {
           var targetNav     = $('[data-nav]')
@@ -53,6 +58,9 @@ $(document).ready(function() {
     ;
 
 
+  console.log(debugPrefix, clickEventType);
+
+
   // Assign some helper classes to things
   $navContainer
     .removeAttr('style')
@@ -70,9 +78,21 @@ $(document).ready(function() {
     var $this = $(this)
       ;
 
+    // get the titlePrefix for the given subNav panel
+    if (!message.titlePrefix) {
+      message.titlePrefix = $this.parents('[data-nav*="offcanvas-nav"]').data('ocnTitlePrefix');
+    }
+
+    console.log(message.titlePrefix);
+
+    // $this.next('ul').prepend(
+    //     '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
+    //   + '<li class="title"><a href="' + $this.attr('href') + '">' + $this.text() + '</a></li>'
+    //   );
+
     $this.next('ul').prepend(
-          '<li class="title"><a href="' + $this.attr('href') + '">' + $this.text() + '</a></li>'
-        + '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
+          '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
+        + '<li class="title"><a href="' + $this.attr('href') + '">' + message.titlePrefix + $this.text() + '</a></li>'
         );
 
     // console.log(debugPrefix, index, value);
