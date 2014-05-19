@@ -11,23 +11,16 @@ $(document).ready(function() {
     return check;
   }
 
-
-  // Add FastClick in attempt to resolve mobile double-tap on nav reveal
-  // FastClick.attach(document.body);
-
-
   var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
-  // var clickEventType  = mobilecheck() ? 'touchstart' : 'click'
     , debugPrefix     = 'labs:'
+    // , $win            = $(window)
+    // , $doc            = $(document)
+    , $body           = $('body')
+    , $navContainer   = $('[data-nav*="offcanvas-nav"]')
 
     , state = {
         active: 'active'
       }
-
-    , $win            = $(window)
-    , $doc            = $(document)
-    , $body           = $('body')
-    , $navContainer   = $('[data-nav*="offcanvas-nav"]')
 
     , message = {
         titlePrefix: false
@@ -74,7 +67,8 @@ $(document).ready(function() {
 
 
   // add a 'back' button to each sub nav level
-  $('.has-child').each(function(index, value) {
+  // $('.has-child').each(function(index, value) {
+  $('.has-child').each(function() {
     var $this = $(this)
       ;
 
@@ -85,17 +79,11 @@ $(document).ready(function() {
 
     console.log(message.titlePrefix);
 
-    // $this.next('ul').prepend(
-    //     '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
-    //   + '<li class="title"><a href="' + $this.attr('href') + '">' + $this.text() + '</a></li>'
-    //   );
-
     $this.next('ul').prepend(
           '<li><button class="nav-back-button" data-nav-back>Back</button></li>'
         + '<li class="title"><a href="' + $this.attr('href') + '">' + message.titlePrefix + $this.text() + '</a></li>'
         );
 
-    // console.log(debugPrefix, index, value);
   });
 
 
@@ -121,7 +109,7 @@ $(document).ready(function() {
       e.preventDefault();
       var $this = $(this);
       $this.next('ul').addClass(state.active);
-      return false; // prevent phantom clicks from the nav trigger happening on mobile
+      return false; // prevent phantom clicks from triggering other things
     });
 
 
@@ -131,29 +119,23 @@ $(document).ready(function() {
       e.preventDefault();
       var $this = $(this);
       window.location.href=$this.attr('href');
-      return false; // prevent phantom clicks from the nav trigger happening on mobile
+      return false; // prevent phantom clicks from triggering other things
     });
 
 
   // Handle subnav up events
-  $navContainer.on(clickEventType, 'button[data-nav-back]', function(e) {
+  $navContainer.on(clickEventType, 'button[data-nav-back]', function() {
       var $this = $(this);
       $this.parent().parent().removeClass(state.active);
-      return false; // prevent phantom clicks from the nav trigger happening on mobile
+      return false; // prevent phantom clicks from triggering other things
     });
 
 
-  $body.on(clickEventType, '[data-overlay].active', function(e) {
-      var $this = $(this);
+  // Handle off-nav click to close menu
+  $body.on(clickEventType, '[data-overlay].active', function() {
+      // var $this = $(this);
       closeMenu();
+      return false; // prevent phantom clicks from triggering other things
     });
-
-  // TODO: add event listener to close on "off-nav" click
-  // $(".scroll-container:before").on(clickEventType, function(e) {
-  //   e.stopPropogation();
-  //   navContainer.toggleClass(state.active);
-  // });
-
-
 
 });

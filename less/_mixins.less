@@ -21,6 +21,7 @@
 .appearance(@arg: none) when (@ms     = true)             { -ms-appearance: @arg; }
 .appearance(@arg: none)                                   { appearance: @arg; }
 
+
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@webkit = true)  { -webkit-transition: @arg @rest; }
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@moz    = true)  { -moz-transition: @arg @rest; }
 .transition(@arg: all, @rest: @anim-duration @anim-type) when (@ms     = true)  { -ms-transition: @arg @rest; }
