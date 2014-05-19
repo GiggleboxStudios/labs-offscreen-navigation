@@ -110,13 +110,14 @@ html, body {
 .nav-panel {
   position: fixed;
   top: 0;
+  z-index: @z-menu-level + 100;
+  width: @full-size;
   height: @full-size;
   .menu-side(-100%);             // determines 'left' or 'right' alignment to .push-container
   .transition(@menu-anchor);
 
   &.active {
     .menu-side(0);
-    z-index: @z-menu-level + 100;
     width: @full-size;
   }
 }
